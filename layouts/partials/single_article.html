@@ -11,7 +11,21 @@
 
             {{ partial "article_header" . }}
             <div class="article-entry" itemprop="articleBody">
-                {{ .Content }}
+              {{ .Content }}
+              {{ if .Params.series }}
+              {{ $name := index .Params.series 0 }}
+              <hr/>
+	          <p><a href="" id="series"></a>
+                Other posts in the <b>{{$name}}</b> series:</p>
+
+              {{ $name := $name | urlize }}
+              {{ $series := index .Site.Taxonomies.series $name }}
+              <ul class="series">
+                {{ range $series.Pages }}
+    	        <li>{{ .Date.Format .Site.Params.date_format }} &mdash; <a href="{{.Permalink}}">{{.LinkTitle}}</a></li>
+                {{end}}
+              </ul>
+              {{end}}
             </div>
             {{ partial "article_footer" . }}
         </div>
