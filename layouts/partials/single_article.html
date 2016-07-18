@@ -13,6 +13,7 @@
             <div class="article-entry" itemprop="articleBody">
               {{ .Content }}
               {{ if .Params.series }}
+              {{ $mytitle := .Title }}
               {{ $name := index .Params.series 0 }}
               <hr/>
 	          <p><a href="" id="series"></a>
@@ -22,7 +23,13 @@
               {{ $series := index .Site.Taxonomies.series $name }}
               <ul class="series">
                 {{ range $series.Pages }}
-    	        <li>{{ .Date.Format .Site.Params.date_format }} &mdash; <a href="{{.Permalink}}">{{.LinkTitle}}</a></li>
+                <li>{{ .Date.Format .Site.Params.date_format }} &mdash;
+                  {{ if eq .Title $mytitle }}
+                  {{.LinkTitle}}
+                  {{ else }}
+    	          <a href="{{.Permalink}}">{{.LinkTitle}}</a>
+                  {{ end }}
+                </li>
                 {{end}}
               </ul>
               {{end}}
