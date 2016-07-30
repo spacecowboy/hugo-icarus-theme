@@ -11,28 +11,7 @@
 
             {{ partial "article_header" . }}
             <div class="article-entry" itemprop="articleBody">
-              {{ .Content }}
-              {{ if .Params.series }}
-              {{ $mytitle := .Title }}
-              {{ $name := index .Params.series 0 }}
-              <hr/>
-	          <p><a href="" id="series"></a>
-                Other posts in the <b>{{$name}}</b> series:</p>
-
-              {{ $name := $name | urlize }}
-              {{ $series := index .Site.Taxonomies.series $name }}
-              <ul class="series">
-                {{ range $series.Pages }}
-                <li>{{ .Date.Format .Site.Params.date_format }} &mdash;
-                  {{ if eq .Title $mytitle }}
-                  {{.LinkTitle}}
-                  {{ else }}
-    	          <a href="{{.Permalink}}">{{.LinkTitle}}</a>
-                  {{ end }}
-                </li>
-                {{end}}
-              </ul>
-              {{end}}
+              {{ .Content }}{{ partial "series.html" . }}
             </div>
             {{ partial "article_footer" . }}
         </div>
