@@ -9,16 +9,17 @@
     <webMaster>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</webMaster>{{end}}{{ with .Site.Copyright }}
     <copyright>{{.}}</copyright>{{end}}{{ if not .Date.IsZero }}
     <lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
-    <atom:link href="{{.URL}}" rel="self" type="application/rss+xml" />
-    {{ range first 15 .Data.Pages }}
+    <atom:link href="{{.URL | absURL}}" rel="self" type="application/rss+xml" />
     {{ with $.Site.Params.cover_image }}<webfeeds:cover image="{{ . | absURL }}" />{{end}}
     {{ with $.Site.Params.logo }}<webfeeds:icon>{{ . | absURL }}</webfeeds:icon>{{end}}
+    {{ range first 15 .Data.Pages }}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
-      {{ with .Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
+      {{ with $.Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
       <guid>{{ .Permalink }}</guid>
+      {{ with .Params.banner }}<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ . | absURL }}"/>{{end}}
       <description>
         {{ .Content | html }}
         {{ partial "series.html" . | html }}
