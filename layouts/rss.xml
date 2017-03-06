@@ -1,4 +1,5 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:webfeeds="http://webfeeds.org/rss/1.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:webfeeds="http://webfeeds.org/rss/1.0"
+     xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}</title>
     <link>{{ .Permalink }}</link>
@@ -19,7 +20,9 @@
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       {{ with $.Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
       <guid>{{ .Permalink }}</guid>
-      {{ with .Params.banner }}<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ . | absURL }}"/>{{end}}
+      {{ with .Params.banner }}
+      <media:thumbnail url="{{. | absURL }}" />
+      {{end}}
       <description>
         {{ .Content | html }}
         {{ partial "series.html" . | html }}
