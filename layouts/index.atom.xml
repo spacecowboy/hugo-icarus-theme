@@ -1,7 +1,7 @@
 {{ `<?xml version='1.0' encoding='UTF-8'?>` | safeHTML }}
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <id>{{ .Permalink }}</id>
-  <title>{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}</title>{{ if not .Date.IsZero }}
+  <title>{{ .Site.Title }}</title>{{ if not .Date.IsZero }}
   <updated>{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</updated>{{ end }}
   <author>{{ with .Site.Params.author }}
     <name>{{ . | safeHTML }}</name>{{ end }}{{ with .Site.Params.author_email }}
