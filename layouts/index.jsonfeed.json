@@ -24,7 +24,7 @@
             "url": {{ $element.Permalink | jsonify }},
             "title": {{ $element.Title | jsonify }},
             "content_html": {{ $element.Content | jsonify }},
-            "date_published": {{ $element.Date.Format "2006-01-02T15:04:05Z" | jsonify }}{{ with $element.Params.banner }},
+            "date_published": {{ $element.Date.Format "2006-01-02T15:04:05-07:00" | jsonify }}{{ with $element.Params.banner }},
             "image": {{ . | absURL | jsonify }}{{end}}
         }
         {{ end }}
