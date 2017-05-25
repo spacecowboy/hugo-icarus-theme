@@ -31,7 +31,9 @@
       <table class="contact-list">
         <tr>
           {{ partial "social" . }}
-          <td><a href="{{ .Site.RSSLink }}" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></td>
+          {{ with  .OutputFormats.Get "atom" -}}
+          <td><a href="{{ .Permalink }}" target="_blank" title="Feed"><i class="fa fa-rss"></i></a></td>
+          {{- end }}
         </tr>
       </table>
     </div>
