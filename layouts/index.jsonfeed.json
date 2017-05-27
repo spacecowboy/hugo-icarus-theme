@@ -14,7 +14,7 @@
     },
     {{- end }}
     {{ with .Site.Params.logo -}}
-    "logo": {{ . | absURL | jsonify }},
+    "icon": {{ . | absURL | jsonify }},
     {{- end}}
     {{ if .Data.Pages }}
     "items": [
