@@ -12,6 +12,17 @@
             {{ partial "article_header" . }}
             <div class="article-entry" itemprop="articleBody">
               {{ .Content }}{{ partial "series.html" . }}
+              {{ if .IsTranslated }}
+              <hr/>
+              <h6>This article is also available in</h6>
+              <ul>
+                {{ range .Translations }}
+                <li>
+                  <a href="{{ .Permalink }}">{{ .Language.LanguageName }}</a>
+                </li>
+                {{ end}}
+              </ul>
+              {{ end }}
             </div>
             {{ partial "article_footer" . }}
         </div>
